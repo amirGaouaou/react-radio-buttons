@@ -297,7 +297,7 @@ export class RadioIcon extends Component {
   getStyles() {
     const { size, innerSize, rootColor, pointColor, disabled, disabledColor, marginRight } = this.props;
     let defaultSize = size || 10
-    let calInnerSize = innerSize || round(0.7*actualSize)
+    let calInnerSize = innerSize || Math.round(0.7*actualSize)
 
     return {
       root: {
