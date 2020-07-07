@@ -106,7 +106,7 @@ export class RadioButton extends Component {
     return {
       root: {
         cursor: disabled ? 'not-allowed' : 'pointer',
-        color: disabled ? (disabledColor || '#e1e1e1') : (rootColor),
+        color: disabled ? (disabledColor || '#e1e1e1') : 'inherit',
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: disabled ? (disabledColor || '#e1e1e1') : (rootColor ),
@@ -125,7 +125,6 @@ export class RadioButton extends Component {
       },
       checked: {
         borderColor: pointColor || '#8CB9FD',
-        color: pointColor || '#8CB9FD',
       },
     };
   }
@@ -200,7 +199,7 @@ export class ReversedRadioButton extends Component {
     return {
       root: {
         cursor: disabled ? 'not-allowed' : 'pointer',
-        color: disabled ? (disabledColor || '#e1e1e1') : (rootColor),
+        color: disabled ? (disabledColor || '#e1e1e1') : 'inherit',
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: disabled ? (disabledColor || '#e1e1e1') : (rootColor),
@@ -219,7 +218,6 @@ export class ReversedRadioButton extends Component {
       },
       checked: {
         borderColor: pointColor || '#8CB9FD',
-        color: pointColor || '#8CB9FD',
       },
     };
   }
