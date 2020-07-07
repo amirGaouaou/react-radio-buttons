@@ -126,7 +126,7 @@ export class RadioButton extends Component {
       checked: {
         borderColor: selectedColorType === 'border' || selectedColorType === 'both' ?  pointColor || '#8CB9FD' : 'inherit',
         backgroundColor: selectedColorType === 'fill' || selectedColorType === 'both' ?  pointColor || '#8CB9FD' : 'inherit',
-        selectedTextColor: selectedTextColor || 'inherit'
+        textColor: selectedTextColor || 'inherit'
       },
     };
   }
@@ -223,7 +223,7 @@ export class ReversedRadioButton extends Component {
       checked: {
         borderColor: selectedColorType === 'border' || selectedColorType === 'both' ?  pointColor || '#8CB9FD' : 'inherit',
         backgroundColor: selectedColorType === 'fill' || selectedColorType === 'both' ?  pointColor || '#8CB9FD' : 'inherit',
-        selectedTextColor: selectedTextColor || 'inherit'
+        textColor: selectedTextColor || 'inherit'
       },
     };
   }
@@ -323,6 +323,9 @@ export class RadioIcon extends Component {
         height: innerSize || calInnerSize,
         borderRadius: '50%',
         background: pointColor || '#8CB9FD',
+        margin: 'auto',
+        position: 'relative',
+        top: '25%'
       }
     }
   }
