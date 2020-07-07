@@ -136,7 +136,7 @@ export class RadioButton extends Component {
   }
 
   render() {
-    const { checked, iconSize, rootColor, pointColor, children, disabled, disabledColor, label, hidden, iconMarginTop, iconLocation } = this.props;
+    const { checked, iconSize, iconInnerSize, rootColor, pointColor, children, disabled, disabledColor, label, hidden, iconMarginTop, iconLocation } = this.props;
     const style = this.getStyles();
     const buttonStyle = Object.assign({}, style.root, checked ? style.checked : {});
     const labelStyle = Object.assign({}, style.root, style.label)
@@ -150,7 +150,7 @@ export class RadioButton extends Component {
           </div>
           { 
             hidden ? undefined : 
-            <RadioIcon size={iconSize}
+            <RadioIcon size={iconSize} innerSize={iconInnerSize}
               checked={checked} rootColor={rootColor} pointColor={pointColor}
               disabled={disabled} disabledColor={disabledColor} iconLocation={iconLocation} iconMarginTop={iconMarginTop}
             />
@@ -170,6 +170,7 @@ export class RadioButton extends Component {
 
 RadioButton.propTypes = {
   iconSize: PropTypes.number,
+  iconInnerSize: PropTypes.number,
   iconLocation: PropTypes.string,
   iconMarginTop: PropTypes.string,
   hidden: PropTypes.bool,
@@ -229,7 +230,7 @@ export class ReversedRadioButton extends Component {
   }
 
   render() {
-    const { checked, iconSize, rootColor, pointColor, children, disabled, disabledColor, padding, label, hidden, iconLocation, iconMarginTop } = this.props;
+    const { checked, iconSize, iconInnerSize, rootColor, pointColor, children, disabled, disabledColor, padding, label, hidden, iconLocation, iconMarginTop } = this.props;
     const style = this.getStyles();
     const buttonStyle = Object.assign({}, style.root, checked ? style.checked : {});
     const labelStyle = Object.assign({}, style.root, style.label)
@@ -237,7 +238,7 @@ export class ReversedRadioButton extends Component {
       <div className={`radio-button ${checked ? 'checked' : ''}`} style={buttonStyle} onClick={this.onClick}>
         <div style={{ display: 'inline-flex', width: '100%' }}>
           { hidden ? undefined : 
-            <RadioIcon size={iconSize}
+            <RadioIcon size={iconSize} innerSize={iconInnerSize}
               checked={checked} rootColor={rootColor} pointColor={pointColor}
               disabled={disabled} disabledColor={disabledColor} iconLocation={iconLocation}
               marginRight={padding || 16} iconMarginTop={iconMarginTop}
@@ -261,6 +262,7 @@ export class ReversedRadioButton extends Component {
 
 ReversedRadioButton.propTypes = {
   iconSize: PropTypes.number,
+  iconInnerSize: PropTypes.number,
   iconLocation: PropTypes.string,
   iconMarginTop: PropTypes.string,
   hidden: PropTypes.bool,
@@ -285,8 +287,10 @@ export class RadioIcon extends Component {
   }
 
   getStyles() {
-    const { size, rootColor, pointColor, disabled, disabledColor, marginRight, iconLocation, iconMarginTop, checked } = this.props;
+    const { size, innerSize, rootColor, pointColor, disabled, disabledColor, marginRight, iconLocation, iconMarginTop, checked } = this.props;
+    let defaultSize = size || 10
     let alignSelf = 'flex-start'
+    let calInnerSize = innerSize || Math.round(0.5*defaultSize)
     if ( iconLocation === "center") {
       alignSelf = 'center'
     } else if (iconLocation === 'bottom') { 
@@ -294,9 +298,9 @@ export class RadioIcon extends Component {
     }
     return {
       root: {
-        width: size || 10,
-        height: size || 10,
-        backgroundColor: checked ? (pointColor || '#8CB9FD') : '#FFF',
+        width: size || defaultSize,
+        height: size || defaultSize,
+        backgroundColor: '#FFF',
         borderWidth: 2,
         borderRadius: '50%',
         borderStyle: 'solid',
@@ -308,6 +312,12 @@ export class RadioIcon extends Component {
       checked: {
         borderColor: pointColor || '#8CB9FD',
       },
+      inner: {
+        width: innerSize || calInnerSize,
+        height: innerSize || calInnerSize,
+        borderRadius: '50%',
+        background: pointColor || '#8CB9FD',
+      }
     }
   }
 
@@ -317,6 +327,7 @@ export class RadioIcon extends Component {
     const iconStyle = Object.assign(style.root, checked ? style.checked : {});
     return (
       <div className={`radio-icon ${checked ? 'checked' : ''}`} style={iconStyle}>
+        {checked && <div style={style.inner} />}
       </div>
     );
   }
@@ -324,6 +335,7 @@ export class RadioIcon extends Component {
 
 RadioIcon.propTypes = {
   size: PropTypes.number,
+  innerSize: PropTypes.number,
   iconLocation: PropTypes.string,
   iconMarginTop: PropTypes.string,
   rootColor: PropTypes.string,
