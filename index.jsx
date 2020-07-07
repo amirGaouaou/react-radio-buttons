@@ -152,8 +152,7 @@ export class RadioButton extends Component {
             hidden ? undefined : 
             <RadioIcon size={iconSize}
               checked={checked} rootColor={rootColor} pointColor={pointColor}
-              disabled={disabled} disabledColor={disabledColor} iconLocation={iconLocation}
-              marginRight={padding || 16} iconMarginTop={iconMarginTop}
+              disabled={disabled} disabledColor={disabledColor} iconLocation={iconLocation} iconMarginTop={iconMarginTop}
             />
           }
         </div>
