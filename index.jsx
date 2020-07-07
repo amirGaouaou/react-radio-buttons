@@ -101,7 +101,7 @@ export class RadioButton extends Component {
   }
 
   getStyles() {
-    const { horizontal, last, padding, rootColor, pointColor, disabled, disabledColor, label } = this.props;
+    const { horizontal, last, padding, rootColor, pointColor, disabled, disabledColor, label, selectedColorType, selectedTextColor  } = this.props;
 
     return {
       root: {
@@ -124,7 +124,9 @@ export class RadioButton extends Component {
         marginRight: horizontal && !last ? (padding || 8) / 2 : 0
       },
       checked: {
-        borderColor: pointColor || '#8CB9FD',
+        borderColor: selectedColorType === 'border' || selectedColorType === 'both' ?  pointColor || '#8CB9FD' : 'inherit',
+        backgroundColor: selectedColorType === 'fill' || selectedColorType === 'both' ?  pointColor || '#8CB9FD' : 'inherit',
+        selectedTextColor: selectedTextColor || 'inherit'
       },
     };
   }
@@ -172,6 +174,8 @@ RadioButton.propTypes = {
   iconInnerSize: PropTypes.number,
   iconLocation: PropTypes.string,
   iconMarginTop: PropTypes.string,
+  selectedColorType: PropTypes.string,
+  selectedTextColor: PropTypes.string,
   hidden: PropTypes.bool,
   padding: PropTypes.number,
   rootColor: PropTypes.string,
@@ -195,7 +199,7 @@ export class ReversedRadioButton extends Component {
   }
 
   getStyles() {
-    const { horizontal, last, padding, rootColor, pointColor, disabled, disabledColor, label } = this.props;
+    const { horizontal, last, padding, rootColor, pointColor, disabled, disabledColor, label, selectedColorType, selectedTextColor } = this.props;
     return {
       root: {
         cursor: disabled ? 'not-allowed' : 'pointer',
@@ -217,7 +221,9 @@ export class ReversedRadioButton extends Component {
         marginRight: horizontal && !last ? (padding || 8) / 2 : 0
       },
       checked: {
-        borderColor: pointColor || '#8CB9FD',
+        borderColor: selectedColorType === 'border' || selectedColorType === 'both' ?  pointColor || '#8CB9FD' : 'inherit',
+        backgroundColor: selectedColorType === 'fill' || selectedColorType === 'both' ?  pointColor || '#8CB9FD' : 'inherit',
+        selectedTextColor: selectedTextColor || 'inherit'
       },
     };
   }
@@ -263,6 +269,8 @@ ReversedRadioButton.propTypes = {
   iconInnerSize: PropTypes.number,
   iconLocation: PropTypes.string,
   iconMarginTop: PropTypes.string,
+  selectedColorType: PropTypes.string,
+  selectedTextColor: PropTypes.string,
   hidden: PropTypes.bool,
   padding: PropTypes.number,
   rootColor: PropTypes.string,
