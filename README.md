@@ -51,6 +51,8 @@ By using `react-radio-buttons`, you can write like this (full example [here](htt
 |----------|----------------|
 |iconSize|size of `RadioIcon`, which appears on the right side of button|
 |iconInnerSize|size of `RadioIcon`'s inner icon when selected, **proper value is same as iconSize or half of iconSize**|
+|iconLocation|`top`,`center`,`bottom` location of the icon|
+|iconMarginTop| top margin value on the icon |
 |hidden| Hides radio icon
 |padding|padding size|
 |rootColor|color when unselected|
