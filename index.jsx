@@ -101,13 +101,13 @@ export class RadioButton extends Component {
   }
 
   getStyles() {
-    const { horizontal, last, padding, rootColor, pointColor, disabled, disabledColor, label, selectedColorType, selectedTextColor  } = this.props;
+    const { horizontal, last, padding, rootColor, pointColor, disabled, disabledColor, label, selectedColorType, selectedTextColor, borderWidth  } = this.props;
 
     return {
       root: {
         cursor: disabled ? 'not-allowed' : 'pointer',
         color: disabled ? (disabledColor || '#e1e1e1') : 'inherit',
-        borderWidth: 1,
+        borderWidth: borderWidth || 1,
         borderStyle: 'solid',
         borderColor: disabled ? (disabledColor || '#e1e1e1') : (rootColor ),
         borderRadius: 1,
@@ -137,7 +137,7 @@ export class RadioButton extends Component {
   }
 
   render() {
-    const { checked, iconSize, iconInnerSize, rootColor, pointColor, children, disabled, disabledColor, label, hidden, iconMarginTop, iconLocation } = this.props;
+    const { checked, iconSize, iconInnerSize, rootColor, pointColor, children, disabled, disabledColor, label, hidden, iconMarginTop, iconLocation, iconWidth } = this.props;
     const style = this.getStyles();
     const buttonStyle = Object.assign({}, style.root, checked ? style.checked : {});
     const labelStyle = Object.assign({}, style.root, style.label)
@@ -152,7 +152,7 @@ export class RadioButton extends Component {
           { 
             hidden ? undefined : 
             <RadioIcon size={iconSize} innerSize={iconInnerSize}
-              checked={checked} rootColor={rootColor} pointColor={pointColor}
+              checked={checked} rootColor={rootColor} pointColor={pointColor} iconWidth={iconWidth}
               disabled={disabled} disabledColor={disabledColor} iconLocation={iconLocation} iconMarginTop={iconMarginTop}
             />
           }
@@ -176,6 +176,8 @@ RadioButton.propTypes = {
   iconMarginTop: PropTypes.string,
   selectedColorType: PropTypes.string,
   selectedTextColor: PropTypes.string,
+  iconWidth: PropTypes.number,
+  borderWidth: PropTypes.number,
   hidden: PropTypes.bool,
   padding: PropTypes.number,
   rootColor: PropTypes.string,
@@ -199,12 +201,12 @@ export class ReversedRadioButton extends Component {
   }
 
   getStyles() {
-    const { horizontal, last, padding, rootColor, pointColor, disabled, disabledColor, label, selectedColorType, selectedTextColor } = this.props;
+    const { horizontal, last, padding, rootColor, pointColor, disabled, disabledColor, label, selectedColorType, selectedTextColor, borderWidth } = this.props;
     return {
       root: {
         cursor: disabled ? 'not-allowed' : 'pointer',
         color: disabled ? (disabledColor || '#e1e1e1') : 'inherit',
-        borderWidth: 1,
+        borderWidth: borderWidth || 1,
         borderStyle: 'solid',
         borderColor: disabled ? (disabledColor || '#e1e1e1') : (rootColor),
         borderRadius: 1,
@@ -234,7 +236,7 @@ export class ReversedRadioButton extends Component {
   }
 
   render() {
-    const { checked, iconSize, iconInnerSize, rootColor, pointColor, children, disabled, disabledColor, padding, label, hidden, iconLocation, iconMarginTop } = this.props;
+    const { checked, iconSize, iconInnerSize, rootColor, pointColor, children, disabled, disabledColor, padding, label, hidden, iconLocation, iconWidth, iconMarginTop } = this.props;
     const style = this.getStyles();
     const buttonStyle = Object.assign({}, style.root, checked ? style.checked : {});
     const labelStyle = Object.assign({}, style.root, style.label)
@@ -245,7 +247,7 @@ export class ReversedRadioButton extends Component {
             <RadioIcon size={iconSize} innerSize={iconInnerSize}
               checked={checked} rootColor={rootColor} pointColor={pointColor}
               disabled={disabled} disabledColor={disabledColor} iconLocation={iconLocation}
-              marginRight={padding || 16} iconMarginTop={iconMarginTop}
+              marginRight={padding || 16} iconMarginTop={iconMarginTop} iconWidth={iconWidth}
             />
           }     
           <div style={{ flex: 1 }}>
@@ -269,6 +271,8 @@ ReversedRadioButton.propTypes = {
   iconInnerSize: PropTypes.number,
   iconLocation: PropTypes.string,
   iconMarginTop: PropTypes.string,
+  iconWidth: PropTypes.number,
+  borderWidth: PropTypes.number,
   selectedColorType: PropTypes.string,
   selectedTextColor: PropTypes.string,
   hidden: PropTypes.bool,
@@ -293,7 +297,7 @@ export class RadioIcon extends Component {
   }
 
   getStyles() {
-    const { size, innerSize, rootColor, pointColor, disabled, disabledColor, marginRight, iconLocation, iconMarginTop, checked } = this.props;
+    const { size, innerSize, rootColor, pointColor, disabled, disabledColor, marginRight, iconLocation, iconMarginTop, iconWidth, checked } = this.props;
     let defaultSize = size || 10
     let alignSelf = 'flex-start'
     let calInnerSize = innerSize || Math.round(0.5*defaultSize)
@@ -307,7 +311,7 @@ export class RadioIcon extends Component {
         width: size || defaultSize,
         height: size || defaultSize,
         backgroundColor: '#FFF',
-        borderWidth: 2,
+        borderWidth: iconWidth || 2,
         borderRadius: '50%',
         borderStyle: 'solid',
         borderColor: disabled ? (disabledColor || '#e1e1e1') : (rootColor),
@@ -319,13 +323,14 @@ export class RadioIcon extends Component {
         borderColor: pointColor || '#8CB9FD',
       },
       inner: {
-        width: innerSize || calInnerSize,
-        height: innerSize || calInnerSize,
+        width: calInnerSize,
+        height: calInnerSize,
         borderRadius: '50%',
         background: pointColor || '#8CB9FD',
-        margin: 'auto',
         position: 'relative',
-        top: '25%'
+        top: '50%',
+        left: '50%',
+        margin: `-${calInnerSize/2}`
       }
     }
   }
@@ -345,6 +350,7 @@ export class RadioIcon extends Component {
 RadioIcon.propTypes = {
   size: PropTypes.number,
   innerSize: PropTypes.number,
+  iconWidth: PropTypes.number,
   iconLocation: PropTypes.string,
   iconMarginTop: PropTypes.string,
   rootColor: PropTypes.string,
