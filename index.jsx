@@ -330,7 +330,7 @@ export class RadioIcon extends Component {
         position: 'relative',
         top: '50%',
         left: '50%',
-        margin: `-${calInnerSize/2}`
+        margin: `-${calInnerSize/2}px`
       }
     }
   }
