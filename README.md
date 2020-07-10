@@ -52,6 +52,9 @@ By using `react-radio-buttons`, you can write like this (full example [here](htt
 |iconSize|size of `RadioIcon`, which appears on the right side of button|
 |iconLocation|`top`,`center`,`bottom` location of the icon|
 |iconMarginTop| top margin value on the icon |
+|iconWidth| Border width of the icon |
+|borderWidth | Border width of the card |
+| selectedColorType| When selected change the color of the `border`, `fill` or `both` | 
 |hidden| Hides radio icon
 |padding|padding size|
 |rootColor|color when unselected|
